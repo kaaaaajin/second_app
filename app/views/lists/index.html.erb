@@ -5,7 +5,6 @@
 <% @lists.each do |list| %>
 <!--eachメソッドはレコードの数だけ繰り返し処理を行う-->
 
-
 <p>タイトル</p>
 <%= link_to list.title, list_path(list.id)  %>
 <!--一覧画面から詳細画面へ遷移するリンクの設定-->
@@ -13,6 +12,14 @@
 
 <!--<span>< %= list.title % ></span>　3章の範囲-->
 <!--list変数.カラム名と記述することでレコードのカラムの内容を表示できる-->
-
+<p>画像</p>
+<% if list.image.attached? %>
+ <%= image_tag list.image, size: "200x200" %>
+<% else %>
+ <%= image_tag 'no_image', size: "200x200" %>
+<% end %>
+<!--image_tagヘルパーを使用し画像の表示-->
+<!--list.imageに対して.attached?というimageが存在するかを確認するメソッドを呼び出し-->
+<!--attached?は、画像が存在していればtrue、存在していなければfalseを返します。-->
 
 <% end %>

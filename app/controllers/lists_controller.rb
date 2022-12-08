@@ -44,10 +44,18 @@ class ListsController < ApplicationController
 # updateアクションでは、データ更新後に更新結果を詳細画面に表示するためshowアクションにリダイレクトさせる
 # そのため、新たなビュー作成は不要
 # showアクションにリダイレクトするために、引数には必ずidが必要になる
+  def destroy
+    list = List.find(params[:id])
+    list.destroy
+    redirect_to 'lists'
+  end
+  # データレコードを１件取得
+  # destroyメソッドによってテーブルからデータが削除される
+  # データ削除後のリダイレクト先は、一覧画面を指す'/lists'（indexアクション）に設定
 
   private
   def list_params
-    params.require(:list).permit(:title,:body)
+    params.require(:list).permit(:title,:body,:image)
   end
   #require 送られてきたデータの中からモデル名を指定し、データを絞り込む
   # permit  絞り込んだデータの中から保存を許可するカラムを指定する※カラムの数だけ指定

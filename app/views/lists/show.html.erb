@@ -6,5 +6,20 @@
 <h2>本文</h2>
 <p><%= @list.body %></p>
 
+<p>画像</p>
+<% if @list.image.attached? %>
+ <%= image_tag @list.image, size: "300x300" %>
+<% else %>
+ <%= image_tag 'no_image', size: "300x300" %>
+<% end %>
+
 <%= link_to "編集", edit_list_path(@list.id) %>
 <!--詳細画面に編集画面へのリンクを追加-->
+
+<%= link_to "削除", list_path(@list.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+<!--esourcesメソッドでルーティングを自動生成するとパスが変更された＊rails routesにて確認、以下変更前-->
+<!--< % = link_to "削除", destroy_list_path(@list.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>-->
+<!--HTTPメソッドがget以外の場合は、urlだけでなくHTTPメソッドも指定しなければならない-->
+<!--data-confirmを用いて削除確認ダイアログも表示されるように設定-->
+
+
